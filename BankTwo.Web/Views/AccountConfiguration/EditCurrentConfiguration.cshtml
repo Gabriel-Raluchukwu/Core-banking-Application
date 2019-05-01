@@ -1,0 +1,68 @@
+﻿@using ViewModels
+@model ConfigCurrentViewModel
+@{
+    ViewBag.Title = "ACCOUNT CONFIGURATION";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 class="text-center card-heading">@ViewBag.Title</h2>
+<hr />
+<div class="card-heading">
+    <span class="secondary-header">
+        Edit Current Account Configuration
+    </span>
+</div>
+<hr />
+<div>
+    @using (Html.BeginForm(actionName: "EditCurrentConfiguration", controllerName: "AccountConfiguration", method: FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group row">
+            @Html.LabelFor(m => m.CurrentCreditInterestRate, new { @class = "col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.CurrentCreditInterestRate, new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.CurrentCreditInterestRate)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.CurrentMinimumBalance, new { @class = "col-md-2 col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.CurrentMinimumBalance, new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.CurrentMinimumBalance)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.COT, new { @class = "col-md-2 col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.COT, new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.COT)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.COTIncomeId, new { @class = "col-md-2 col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.COTIncomeId, new SelectList(Model.GLAccounts, "Id", "GLAccountName"), "Select GL Account", new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.COTIncomeId)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.IEAccountId, new { @class = "col-md-2 col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.IEAccountId, new SelectList(Model.GLAccounts, "Id", "GLAccountName"), "Select GL Account", new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.IEAccountId)
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <input type="submit" class="btn btn-primary col-md-6" value="SAVE" />
+            </div>
+        </div>
+    }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>
+
+

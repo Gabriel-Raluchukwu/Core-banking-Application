@@ -1,0 +1,45 @@
+﻿@using ViewModels
+@model ConfigLoanViewModel
+@{
+    ViewBag.Title = "ACCOUNT CONFIGURATION";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 class="text-center card-heading">@ViewBag.Title</h2>
+<hr />
+<div class="card-heading">
+    <span class="secondary-header">
+        Edit Loan Account Configuration
+    </span>
+</div>
+<hr />
+<div>
+    @using (Html.BeginForm(actionName: "EditLoanConfiguration", controllerName: "AccountConfiguration", method: FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group row">
+            @Html.LabelFor(m => m.DebitInterestRate, new { @class = "col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.DebitInterestRate, new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.DebitInterestRate)
+            </div>
+        </div>
+       
+        <div class="form-group row">
+            @Html.LabelFor(m => m.InterestIncomeId, new { @class = "col-md-2 col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.InterestIncomeId, new SelectList(Model.GLAccounts, "Id", "GLAccountName"), "Select GL Account",new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.InterestIncomeId)
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <input type="submit" class="btn btn-primary col-md-6" value="SAVE" />
+            </div>
+        </div>
+    }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>
+

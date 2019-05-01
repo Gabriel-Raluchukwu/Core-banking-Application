@@ -1,0 +1,59 @@
+﻿@using ViewModels
+@model CustomerAccountViewModel
+@{
+    ViewBag.Title = "CUSTOMER ACCOUNT";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center card-heading">@ViewBag.Title</h2>
+<hr />
+<div class="card-heading">
+    <span class="secondary-header">
+        Add Customer Account
+    </span>
+</div>
+<hr />
+<div>
+    @using (Html.BeginForm("CreateCustomerAccount", "CustomerAccount", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group row">
+            <div class="col-md-2"></div>
+            <div class="col-form-label col-md-10">
+                @Html.ActionLink(linkText: "Select Customer", actionName: "CustomerAccountSelect", controllerName: "Customer", routeValues: null, htmlAttributes: new { @class = "btn btn-primary col-md-10" });
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.CAccountName, new { @class = "col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.CAccountName, new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.CAccountName)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Branches, new { @class = "col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.BranchId, new SelectList(Model.Branches, "Id", "Location"), "Select Branch", new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.BranchId)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.AccountTypeEnum, new { @class = "col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(m => m.AccountTypeEnum, "Select Account Type", new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.AccountTypeEnum)
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-2 col-form-label"></div>
+            <div class="col-md-4">
+                <input type="submit" class="btn btn-primary col-md-6" value="CREATE ACCOUNT" />
+            </div>
+        </div>
+        @Html.HiddenFor(m => m.CustomerId)
+    }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>
+

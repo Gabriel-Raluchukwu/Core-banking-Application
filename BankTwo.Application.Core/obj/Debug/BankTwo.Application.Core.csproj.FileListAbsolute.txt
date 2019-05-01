@@ -1,0 +1,17 @@
+C:\Users\Raluchukwu\source\repos\BankTwo\BankTwo.Application.Core\bin\Debug\BankTwo.Application.Core.dll
+C:\Users\Raluchukwu\source\repos\BankTwo\BankTwo.Application.Core\bin\Debug\BankTwo.Application.Core.pdb
+C:\Users\Raluchukwu\source\repos\BankTwo\BankTwo.Application.Core\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\Raluchukwu\source\repos\BankTwo\BankTwo.Application.Core\obj\Debug\BankTwo.Application.Core.csprojAssemblyReference.cache
+C:\Users\Raluchukwu\source\repos\BankTwo\BankTwo.Application.Core\obj\Debug\BankTwo.Application.Core.csproj.CoreCompileInputs.cache
+C:\Users\Raluchukwu\source\repos\BankTwo\BankTwo.Application.Core\obj\Debug\BankTwo.Application.Core.csproj.CopyComplete
+C:\Users\Raluchukwu\source\repos\BankTwo\BankTwo.Application.Core\obj\Debug\BankTwo.Application.Core.dll
+C:\Users\Raluchukwu\source\repos\BankTwo\BankTwo.Application.Core\obj\Debug\BankTwo.Application.Core.pdb
+C:\Users\Raluchukwu\source\repos\BankTwo\BankTwo.Application.Core\bin\Debug\BankTwo.Application.Core.dll.config
+C:\Users\Raluchukwu\source\repos\BankTwo\BankTwo.Application.Core\bin\Debug\EntityFramework.dll
+C:\Users\Raluchukwu\source\repos\BankTwo\BankTwo.Application.Core\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Raluchukwu\source\repos\BankTwo\BankTwo.Application.Core\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Raluchukwu\source\repos\BankTwo\BankTwo.Application.Core\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Raluchukwu\source\repos\BankTwo\BankTwo.Application.Core\bin\Debug\EntityFramework.xml
+C:\Users\Raluchukwu\source\repos\BankTwo\BankTwo.Application.Core\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Raluchukwu\source\repos\BankTwo\BankTwo.Application.Core\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Raluchukwu\source\repos\BankTwo\BankTwo.Application.Core\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml

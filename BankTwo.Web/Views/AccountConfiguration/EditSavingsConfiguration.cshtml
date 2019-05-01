@@ -1,0 +1,51 @@
+﻿@using ViewModels
+@model ConfigSavingsViewModel
+@{
+    ViewBag.Title = "ACCOUNT CONFIGURATION";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 class="text-center card-heading">@ViewBag.Title</h2>
+<hr />
+<div class="card-heading">
+    <span class="secondary-header">
+        Edit Savings Account Configuration
+    </span>
+</div>
+<hr />
+<div>
+    @using (Html.BeginForm(actionName: "EditSavingsConfiguration", controllerName: "AccountConfiguration", method: FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group row">
+            @Html.LabelFor(m => m.SavingsCreditInterestRate, new { @class = "col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.SavingsCreditInterestRate, new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.SavingsCreditInterestRate)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.SavingsMinimumBalance, new { @class = "col-md-2 col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.SavingsMinimumBalance, new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.SavingsMinimumBalance)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.IEAccountId, new { @class = "col-md-2 col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.IEAccountId, new SelectList(Model.GLAccounts, "Id", "GLAccountName"), "Select GL Account" ,new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.IEAccountId)
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <input type="submit" class="btn btn-primary col-md-6" value="SAVE" />
+            </div>
+        </div>
+    }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>
+

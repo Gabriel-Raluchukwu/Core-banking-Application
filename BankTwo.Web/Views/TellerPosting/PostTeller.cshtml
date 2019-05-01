@@ -1,0 +1,66 @@
+﻿@using ViewModels
+@model TellerPostViewModel
+@{
+    ViewBag.Title = "TELLER POST";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 class="text-center card-heading">@ViewBag.Title</h2>
+<hr />
+<div class="card-heading">
+    <span class="secondary-header">
+        Post Teller Transaction
+    </span>
+</div>
+<hr />
+<div>
+    @using (Html.BeginForm("PostTeller", "TellerPosting", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group row">
+            <div class="col-md-2"></div>
+            <div class="col-form-label col-md-10">
+                @Html.ActionLink(linkText: "SELECT CUSTOMER ACCOUNT", actionName: "DisplayCustomerAccountsSelect", controllerName: "CustomerAccount", routeValues: null, htmlAttributes: new { @class = "btn btn-primary col-md-10" });
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.DebitAmount, new { @class = "col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.DebitAmount, new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.DebitAmount)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.CreditAmount, new { @class = "col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.CreditAmount, new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.CreditAmount)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.TellerPostingType, new { @class = "col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(m => m.TellerPostingType, "Select Post Action", new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.TellerPostingType)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Narration, new { @class = "col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(m => m.Narration, new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.Narration)
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-2 col-form-label"></div>
+            <div class="col-md-5">
+                <input type="submit" class="btn btn-primary col-md-6" value="POST TRANSACTION" />
+            </div>
+        </div>
+    @Html.HiddenFor( m => m.CustomerAccountId);
+    }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>
+
+

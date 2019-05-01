@@ -1,0 +1,62 @@
+﻿@using ViewModels
+@model IEnumerable<TellerPostViewModel>
+@{
+    ViewBag.Title = "TELLER POSTS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 class="text-center card-heading">@ViewBag.Title</h2>
+<div class="box">
+    <hr />
+    <div class="box-header card-heading">
+        <h3 class="box-title">Teller Postings</h3>
+    </div>
+    <hr />
+    <!-- /.box-header -->
+    <div class="box-body">
+        <div class="input-group m-md-2">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </span>
+            </div>
+            <input id="SearchInput" class="form-control" type="text" placeholder="Search by Account Number..." onkeyup="SearchFunction()" />
+        </div>
+        <table id="Table" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Account Name</th>
+                    <th>Account Number</th>
+                    <th>Debit Amount</th>
+                    <th>Credit Amount</th>
+                    <th>Narration</th>
+                    <th>Transaction Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var post in Model)
+                {
+                    <tr>
+                        <td>@post.CustomerAccountName</td>
+                        <td>@post.CustomerAccountNumber</td>
+                        <td>@post.DebitAmount</td>
+                        <td>@post.CreditAmount</td>
+                        <td>@post.Narration</td>
+                        <td>@post.TransactionDate</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Account Name</th>
+                    <th>Account Number</th>
+                    <th>Debit Amount</th>
+                    <th>Credit Amount</th>
+                    <th>Narration</th>
+                    <th>Transaction Date</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+@Scripts.Render("~/bundles/jqueryTable")
+

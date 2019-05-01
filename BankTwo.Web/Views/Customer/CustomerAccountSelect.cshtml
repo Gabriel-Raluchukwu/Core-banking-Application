@@ -1,0 +1,67 @@
+﻿@using ViewModels
+@model IEnumerable<CustomerViewModel>
+@{
+    ViewBag.Title = "CUSTOMERS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center card-heading">@ViewBag.Title</h2>
+<div class="box">
+    <hr />
+    <div class="box-header card-heading">
+        <h3 class="box-title">Add Customer to Account</h3>
+    </div>
+    <hr />
+    <!-- /.box-header -->
+    <div class="box-body">
+        <div class="input-group m-md-2">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </span>
+            </div>
+            <input id="SearchInput" class="form-control" type="text" placeholder="Search by First Name..." onkeyup="SearchFunction()" />
+        </div>
+        <table id="Table" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var customer in Model)
+                {
+                    <tr>
+                        <td>@customer.IdentificationNumber</td>
+                        <td>@customer.FirstName</td>
+                        <td>@customer.LastName</td>
+                        <td>@customer.Email</td>
+                        <td>@customer.Gender</td>
+                        <td>
+                            @Html.ActionLink("ADD ACCOUNT", "CreateCustomerAccount", "CustomerAccount", new { id = customer.EncryptedId }, new { @class = "btn btn-outline-primary btn-sm m-0 waves-effect" })
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Other Names</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+@Scripts.Render("~/bundles/jqueryTable")
+

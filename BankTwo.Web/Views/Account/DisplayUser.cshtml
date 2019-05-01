@@ -1,0 +1,76 @@
+﻿@using ViewModels
+@model IEnumerable<RegisterViewModel>
+@{
+    ViewBag.Title = "EMPLOYEES";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/tables_theme")
+<h2 class="text-center card-heading ">@ViewBag.Title</h2>
+<div class="box">
+    <hr />
+    <div class="box-header secondary-header">
+        <h3 class="box-title card-heading">REGISTERED EMPLOYEES</h3>
+    </div>
+    <hr />
+    @Html.ActionLink(linkText: "ADD NEW USER", actionName: "Register",routeValues: null,
+    htmlAttributes: new {@class="btn btn-primary" })
+    <p></p>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <div class="box-body">
+            <div class="input-group m-md-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <input id="SearchInput" class="form-control" type="text" placeholder="Search by First Name..." onkeyup="SearchFunction()" />
+            </div>
+            <table id="Table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th scope="col">Surnmame</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Middle Name</th>
+                        <th scope="col">User Name</th>
+                        <th scope="col">Branch</th>
+                        <th scope="col">Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var admin in Model)
+                    {
+                        <tr>
+                            <td>@admin.LastName</td>
+                            <td>@admin.FirstName</td>
+                            <td>@admin.OtherNames</td>
+                            <td>@admin.UserName</td>
+                            <td>@admin.Branch.Location</td>
+                            <td>@admin.Email</td>
+                            <td>
+                                @Html.ActionLink("EDIT", "EditUser", "Account", new { id = admin.EncryptedId }, new { @class = "btn btn-outline-primary btn-sm m-0 waves-effect" }) <span>@*|</span>
+                                @Html.ActionLink("DELETE", "DeleteUser", "Account", new { id = admin.EncryptedId }, new { @class = "btn btn-outline-primary btn-sm m-0 waves-effect" })*@
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th scope="col">Surnmame</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Middle Name</th>
+                        <th scope="col">User Name</th>
+                        <th scope="col">Branch</th>
+                        <th scope="col">Email</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+</div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryTable")
+
+

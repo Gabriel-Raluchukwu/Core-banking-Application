@@ -1,0 +1,61 @@
+﻿@using ViewModels
+@model IEnumerable<CustomerAccountViewModel>
+@{
+    ViewBag.Title = "CUSTOMER ACCOUNTS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 class="text-center card-heading">@ViewBag.Title</h2>
+<div class="box">
+    <hr />
+    <div class="box-header card-heading">
+        <h3 class="box-title">Display Customers Accounts</h3>
+    </div>
+    <hr />
+    <!-- /.box-header -->
+    <div class="box-body">
+        <div class="input-group m-md-2">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </span>
+            </div>
+            <input id="SearchInput" class="form-control" type="text" placeholder="Search by Account Number..." onkeyup="SearchFunction()" />
+        </div>
+        <table id="Table" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Account Name</th>
+                    <th>Account Number</th>
+                    <th>Branch</th>
+                    <th>Account Type</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var customerAccount in Model)
+                {
+                    <tr>
+                        <td>@customerAccount.CAccountName</td>
+                        <td>@customerAccount.CAccountNumber</td>
+                        <td>@customerAccount.BranchName</td>
+                        <td>@customerAccount.AccountTypeEnum</td>
+                        <td>
+                            @Html.ActionLink("SELECT ACCOUNT", "AddLoanAccount", "CustomerAccount", new { id = customerAccount.EncryptedId }, new { @class = "btn btn-outline-primary btn-sm m-0 waves-effect" })
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Account Name</th>
+                    <th>Account Number</th>
+                    <th>Branch</th>
+                    <th>Account Type</th>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+@Scripts.Render("~/bundles/jqueryTable")

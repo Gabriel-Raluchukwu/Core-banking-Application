@@ -1,0 +1,71 @@
+﻿@using ViewModels
+@model TransactionViewModel
+@{
+    ViewBag.Title = "TRANSACTION MANAGEMENT";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1 class="text-center card-heading">@ViewBag.Title</h1>
+<hr />
+<div class="card-heading">
+    <span class="secondary-header">
+        Post Transaction
+    </span>
+</div>
+<hr />
+@using (Html.BeginForm(actionName: "PostTransaction", controllerName: "Transaction", method: FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+<div>
+    <div class="form-group row">
+        @Html.LabelFor(m => m.DebitGLAccountId, new { @class = "col-md-2 col-form-label text-md-right" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.DebitGLAccountId, new SelectList(Model.GLAccountDropDown, "Id", "GLAccountName"), "Select GLAccount", new { @class = "form-control col-md-10" })
+            @Html.ValidationMessageFor(m => m.DebitGLAccountId)
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(m => m.DebitAmount, new { @class = "col-md-2 col-form-label text-md-right" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.DebitAmount, new { @class = "form-control col-md-10" })
+            @Html.ValidationMessageFor(m => m.DebitAmount)
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(m => m.CreditGLAccountId, new { @class = "col-md-2 col-form-label text-md-right" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.CreditGLAccountId, new SelectList(Model.GLAccountDropDown, "Id", "GLAccountName"), "Select GLAccount", new { @class = "form-control col-md-10" })
+            @Html.ValidationMessageFor(m => m.CreditGLAccountId)
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(m => m.CreditAmount, new { @class = "col-md-2 col-form-label text-md-right" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.CreditAmount, new { @class = "form-control col-md-10" })
+            @Html.ValidationMessageFor(m => m.CreditAmount)
+        </div>
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(m => m.Narration, new { @class = "col-form-label col-md-2 text-md-right" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.Narration, new { @class = "form-control col-md-10" })
+            @Html.ValidationMessageFor(m => m.Narration)
+        </div>
+    </div>
+</div>
+
+    <br />
+    <div class="form-group row">
+        <div class="col-md-2"></div>
+        <div class="col-md-5">
+            <input type="submit" class="btn btn-primary col-md-6" value="POST TRANSACTION" />
+        </div>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+
+
+
+

@@ -1,0 +1,56 @@
+﻿@using ViewModels
+@model VaultViewModel
+@{
+    ViewBag.Title = "VAULT ACCOUNT";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 class="text-center card-heading">@ViewBag.Title</h2>
+<hr />
+<div class="card-heading">
+    <span class="secondary-header">
+        Load Vault Account
+    </span>
+</div>
+<hr />
+<div>
+    @using (Html.BeginForm(actionName: "LoadVaultAccount", controllerName: "Vault", method: FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group row">
+            <div class="col-md-2"></div>
+            <div class="col-md-10">
+               <h2> 
+                   <p>Select Capital GL Account</p>
+                </h2>
+            </div>
+        </div>
+        
+        <div class="form-group row">
+            @Html.LabelFor(m => m.GLAccountId, new { @class = "col-md-2 col-form-label text-md-right" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.GLAccountId, new SelectList(Model.GLAccountDropDown, "Id", "GLAccountName"), "Select GL Account", new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.GLAccountId)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.VaultAmount, new { @class = "col-md-2 col-form-label text-md-right" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.VaultAmount, new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.VaultAmount)
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <input type="submit" class="btn btn-primary col-md-6" value="LOAD VAULT" />
+            </div>
+        </div>
+    }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>
+
+
+

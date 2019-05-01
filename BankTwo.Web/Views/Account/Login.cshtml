@@ -1,0 +1,55 @@
+﻿@using ViewModels
+@model LoginViewModel
+@{
+    Layout = "";
+    ViewBag.Title = "Log in";
+}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - BANK TWO</title>
+        @Styles.Render("~/Content/css")
+    </head>
+    <body id="LoginForm">
+        <div class="container">
+            <p></p>
+            <div class="login-form">
+                <div class="main-div">
+                    <div class="panel">
+                        <h4>BANK TWO</h4>  
+                    </div>
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    { 
+                       @Html.AntiForgeryToken()
+                        <div class="form-group">   
+                            @Html.TextBoxFor(m => m.UserName, new {@class = "form-control",Style = "background:#ffffff;", placeholder = "User Name"})
+                            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">                        
+                            <div>
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control",Style = "background:#ffffff;", placeholder = "Password"})
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(m => m.RememberMe)
+                                @Html.LabelFor(m => m.RememberMe)
+                            </div>
+                        </div>*@
+                        <br/>
+                        <input type="submit" class="btn btn-primary" value="Log In" />
+                    }
+                </div>
+
+            </div>
+        </div>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+    </body>
+</html>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

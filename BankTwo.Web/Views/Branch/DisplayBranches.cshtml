@@ -1,0 +1,51 @@
+﻿@using ViewModels
+@model IEnumerable<BranchViewModel>
+@{
+    ViewBag.Title = "BANK BRANCHES";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 class="text-center card-heading">@ViewBag.Title</h2>
+<div class="box">
+    <hr />
+    <div class="box-header card-heading">
+        <h3 class="box-title">Display Branches</h3>
+    </div>
+    <hr />
+    <div class="box-body">
+        <div class="input-group m-md-2">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </span>
+            </div>
+            <input id="SearchInput" class="form-control" type="text" placeholder="Search by Location..." onkeyup="SearchFunction()" />
+        </div>
+        <table id="Table" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Location</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var branch in Model)
+                {
+                    <tr>
+                        <td>@branch.Location</td>
+                        <td>@branch.Address</td>                     
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Location</th>
+                    <th>Address</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+@Scripts.Render("~/bundles/jqueryTable")
+
+
+

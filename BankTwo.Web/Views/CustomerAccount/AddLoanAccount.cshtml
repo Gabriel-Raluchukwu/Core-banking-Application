@@ -1,0 +1,90 @@
+﻿@using ViewModels
+@model LoanAccountViewModel
+<h2 class="text-center card-heading">@ViewBag.Title</h2>
+<hr />
+<div class="card-heading">
+    <span class="secondary-header">
+        Add Customer
+    </span>
+</div>
+<hr />
+<div>
+    @using (Html.BeginForm("AddLoanAccount", "CustomerAccount", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group row">
+            <div class="col-md-2"></div>
+            <div class="col-form-label col-md-10">
+                @Html.ActionLink(linkText: "Select Customer Account", actionName: "SelectCustomerAccountForLoan", controllerName: "CustomerAccount", routeValues: null, htmlAttributes: new { @class = "btn btn-primary col-md-10" });
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.CAccountName, new { @class = "col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.CAccountName, new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.CAccountName)
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(m => m.LoanPrincipal, new { @class = "col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.LoanPrincipal, new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.LoanPrincipal)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.LoanDuration, new { @class = "col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.LoanDuration, new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.LoanDuration)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.LoanPaymentSchedule, new { @class = "col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(m => m.LoanPaymentSchedule, "Select Payment Schedule", new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.LoanPaymentSchedule)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.BranchId, new { @class = "col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.BranchId, new SelectList(Model.Branches, "Id", "Location"), "Select Branch", new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.BranchId)
+            </div>
+        </div>
+        <br />
+        <div class="form-group row">
+            @Html.LabelFor(m => m.LoanStartDate, new { @class = "col-form-label text-md-right col-md-2" })
+            <div class=" row col-md-10">
+                @Html.LabelFor(m => m.Day, new { @class = "col-form-label col-md-1" })
+                @Html.TextBoxFor(m => m.Day, new { @class = "form-control col-md-2" })
+                @Html.ValidationMessageFor(m => m.Day)
+
+                @Html.LabelFor(m => m.Month, new { @class = "col-form-label col-md-1" })
+                @Html.TextBoxFor(m => m.Month, new { @class = "form-control col-md-2" })
+                @Html.ValidationMessageFor(m => m.Month)
+
+                @Html.LabelFor(m => m.Year, new { @class = "col-form-label col-md-1" })
+                @Html.TextBoxFor(m => m.Year, new { @class = "form-control col-md-2" })
+                @Html.ValidationMessageFor(m => m.Year)
+            </div>
+        </div>
+
+        <br />
+        <div class="form-group row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <input type="submit" class="btn btn-primary col-md-6" value="REGISTER" />
+            </div>
+        </div>
+        @Html.HiddenFor(m => m.CustomerAccountId)
+    }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>
+
+
+

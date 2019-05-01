@@ -1,0 +1,46 @@
+﻿@using ViewModels
+@model BranchViewModel
+@{
+    ViewBag.Title = "BANK BRANCH MANAGEMENT";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 class=" text-center card-heading">@ViewBag.Title</h2>
+<hr />
+<div class="card-heading">
+    <span class="secondary-header">
+        Add Branch
+    </span>
+</div>
+<hr />
+<div>
+    @using (Html.BeginForm("AddBranch", "Branch", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Location, new { @class = "col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Location, new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.Location)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Address, new { @class = "col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Address, new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.Address)
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <input type="submit" class="btn btn-primary col-md-6" value="SAVE" />
+            </div>
+        </div>
+    }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>
+
+
+

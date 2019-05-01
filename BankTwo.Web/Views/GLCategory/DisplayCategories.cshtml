@@ -1,0 +1,62 @@
+﻿@using ViewModels
+@model IEnumerable<GLCategoryDisplayViewModel>
+@{
+    ViewBag.Title = "GENERAL LEDGER CATEGORY";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center card-heading">@ViewBag.Title</h2>
+<div class="box">
+    <hr />
+    <div class="box-header card-heading">
+        <h3 class="box-title">General Ledger Categories</h3>
+    </div>
+    <hr />
+    <!-- /.box-header -->
+    <div class="box-body">
+        <div class="input-group m-md-2">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </span>
+            </div>
+            <input id="SearchInput" class="form-control" type="text" placeholder="Search by Category Name..." onkeyup="SearchFunctionRow1()" />
+        </div>
+        <table id="Table" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>GL Category Name</th>
+                    <th>Main Account Category</th>
+                    <th>Description</th>
+                    <th>Date Last Updated</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var category in Model)
+                {
+                    <tr>
+                        <td>@category.GLCategoryName</td>
+                        <td>@category.MainCategoryName</td>
+                        <td>@category.GLCategoryDescription</td>
+                        <td>@category.DateLastUpdated</td>
+                        <td>
+                            @Html.ActionLink("EDIT", "EditCategory", "GLCategory", new { id = category.EncryptedId }, new { @class = "btn btn-outline-primary btn-sm m-0 waves-effect" })@*|@Html.ActionLink("DELETE", "DeleteCategory", "GLCategory", new { id = category.EncryptedId }, new { @class = "btn btn-default" })*@
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>GL Category Name</th>
+                    <th>Main Account Category</th>
+                    <th>Description</th>
+                    <th>Date Last Updated</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+@Scripts.Render("~/bundles/jqueryTable")
+

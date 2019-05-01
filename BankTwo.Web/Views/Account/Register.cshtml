@@ -1,0 +1,89 @@
+﻿@using ViewModels
+@model RegisterViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "REGISTER NEW EMPLOYEE";
+}
+
+<h2 class="text-center card-heading">BANK TWO</h2>
+<hr />
+<div class="card-heading">
+    <span class="secondary-header">
+        Register User
+    </span>
+</div>
+<hr />
+<div>
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group row">
+            @Html.LabelFor(m => m.FirstName, new { @class = "col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control col-md-10 " })
+                @Html.ValidationMessageFor(m => m.FirstName)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.LastName)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.OtherNames, new { @class = "col-md-2 col-form-label text-md-right" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.OtherNames, new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.OtherNames)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 col-form-label text-md-right" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.UserName)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 col-form-label text-md-right" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 col-form-label text-md-right" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.PhoneNumber)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.UserRole, new { @class = "col-md-2 col-form-label text-md-right" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.UserRole, new SelectList(Model.IdentityRoles, "Name", "Name"), "Select Role", new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.UserRole)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Branch, new { @class = "col-md-2 col-form-label text-md-right" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.BranchId, new SelectList(Model.BranchList, "Id", "Location"), "Select Branch", new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.BranchId)
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-2 col-form-label"> </div>
+            <div class="col-md-4">
+                <input type="submit" class="btn btn-primary col-md-6" value="REGISTER" />
+            </div>
+        </div>
+    }
+
+</div>
+@Scripts.Render("~/bundles/jquery")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

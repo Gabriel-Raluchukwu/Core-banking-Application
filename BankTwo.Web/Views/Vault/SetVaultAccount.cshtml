@@ -1,0 +1,66 @@
+﻿@using ViewModels
+@model VaultViewModel
+@{
+                /**/
+
+                ViewBag.Title = "VAULT ACCOUNT";
+                Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (TempData["Vault"].ToString() == "false")
+{
+    <h2 class="text-center card-heading">@ViewBag.Title</h2>
+    <hr />
+    <div class="card-heading">
+        <span class="secondary-header">
+            Set Vault Account
+        </span>
+    </div>
+    <hr />
+    <div>
+        @using (Html.BeginForm(actionName: "SetVaultAccount", controllerName: "Vault", method: FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group row">
+                @Html.LabelFor(m => m.GLAccountId, new { @class = "col-md-2 col-form-label text-md-right" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.GLAccountId, new SelectList(Model.GLAccountDropDown, "Id", "GLAccountName"), "Select GL Account", new { @class = "form-control col-md-10" })
+                    @Html.ValidationMessageFor(m => m.GLAccountId)
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <input type="submit" class="btn btn-primary col-md-6" value="SET AS VAULT" />
+                </div>
+            </div>
+        }
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+    </div>
+
+}
+else
+{
+    <br />
+    <br />
+    <h2> Vault Account Already Set</h2>
+
+    <br />
+   
+    <div class="form-group row">
+        <div class="col-md-2"></div>
+        <div class="col-md-10">
+            @Html.ActionLink(linkText: "Reset Vault Account", actionName: "ResetVault", controllerName: "Vault", routeValues: null, htmlAttributes: new { @class = "btn btn-primary col-md-10" });
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-2"></div>
+        <div class="col-md-10">
+            @Html.ActionLink(linkText: "Load Vault Account", actionName: "LoadVaultAccount", controllerName: "Vault", routeValues: null, htmlAttributes: new { @class = "btn btn-primary col-md-10" });
+        </div>
+    </div>
+}
+

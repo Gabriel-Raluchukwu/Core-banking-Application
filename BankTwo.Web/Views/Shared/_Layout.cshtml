@@ -1,0 +1,383 @@
+﻿@using  Microsoft.AspNet.Identity
+
+
+<!DOCTYPE html lang ="en">
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="Bank Two Parent layout page">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+	<title>@ViewBag.Title - BANK TWO</title>
+	@Styles.Render("~/Content/css")
+	@Styles.Render("~/Content/layout_theme")
+	@Scripts.Render("~/bundles/modernizr")
+
+
+</head>
+<body>
+	@{
+		string AdministratorRole = "Administrator";
+		string SuperAdmininistratorRole = "Super Administrator";
+		string CustomerCareRole = "Customer Care";
+		string TellerRole = "Teller";
+	}
+	<div class="page-wrapper chiller-theme toggled">
+		<a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+			<i class="fas fa-bars"></i>
+		</a>
+		<div class="sidebar-wrapper">
+			<nav id="sidebar" class="sidebar-content">
+
+				<div class="sidebar-brand">
+					<a href="#"><span>BANK TWO</span></a>
+				</div>
+				<div class="sidebar-header">
+					@*<div class="user-pic">
+							<img class="img-responsive img-rounded" src="~/Images/user_icon.jpg"
+								 alt="User picture">
+						</div>*@
+					<div class="user-info">
+						<span class="user-name">
+							User-Name : <strong> @User.Identity.GetUserName() </strong>
+
+						</span>
+						<span class="user-status">
+							<i class="fa fa-circle"></i>
+							<span>Online</span>
+						</span>
+					</div>
+				</div>
+				<!-- sidebar-header  -->
+
+				<div class="sidebar-menu">
+					<ul>
+						<li class="header-menu">
+							<span>General</span>
+						</li>
+						<li class="sidebar-dropdown active">
+							<a href="#">
+								<i class="fa fa-id-card" aria-hidden="true"></i>
+								<span>Customer Management</span>
+							</a>
+							<div class="sidebar-submenu" style="display:block;">
+								<ul>
+									@if (User.IsInRole(CustomerCareRole) || User.IsInRole(SuperAdmininistratorRole) || User.IsInRole(AdministratorRole))
+									{
+										<li>
+											@Html.ActionLink(linkText: "Add Customer", actionName: "CreateCustomer", controllerName: "Customer", routeValues: null, htmlAttributes: new { title = "Manage" })
+										</li>
+									}
+									<li>
+										@Html.ActionLink(linkText: "View Customers", actionName: "DisplayCustomers", controllerName: "Customer", routeValues: null, htmlAttributes: new { title = "Manage" })
+									</li>
+								</ul>
+							</div>
+						</li>
+						
+						<li class="sidebar-dropdown">
+							<a href="#">
+								<i class="fa fa-book" aria-hidden="true"></i>
+								<span>Account Management</span>
+							</a>
+							<div class="sidebar-submenu">
+								<ul>
+									@if (User.IsInRole(SuperAdmininistratorRole) || User.IsInRole(AdministratorRole) || User.IsInRole(CustomerCareRole))
+									{
+										<li>
+											@Html.ActionLink(linkText: "Add Customer Account", actionName: "CreateCustomerAccount", controllerName: "CustomerAccount", routeValues: null, htmlAttributes: new { title = "Manage" })
+										</li>
+									}
+									<li>
+										@Html.ActionLink(linkText: "View Customer Accounts", actionName: "DisplayCustomerAccounts", controllerName: "CustomerAccount", routeValues: null, htmlAttributes: new { title = "Manage" })
+									</li>
+									<li>
+										@Html.ActionLink(linkText: "View Loan Accounts", actionName: "DisplayLoanAccounts", controllerName: "CustomerAccount", routeValues: null, htmlAttributes: new { title = "Manage" })
+									</li>
+									@if (User.IsInRole(SuperAdmininistratorRole) || User.IsInRole(AdministratorRole) || User.IsInRole(CustomerCareRole))
+									{
+										<li>
+											@Html.ActionLink(linkText: "Add Loan Account", actionName: "AddLoanAccount", controllerName: "CustomerAccount", routeValues: null, htmlAttributes: new { title = "Manage" })
+										</li>
+										<li>
+											@Html.ActionLink(linkText: "Close Customer Account", actionName: "DisplayOpenAccounts", controllerName: "CustomerAccount", routeValues: null, htmlAttributes: new { title = "Manage" })
+										</li>
+									}
+								</ul>
+							</div>
+						</li>
+		
+						@if (User.IsInRole(SuperAdmininistratorRole) || User.IsInRole(AdministratorRole))
+						{
+							<li class="sidebar-dropdown">
+								<a href="#">
+									<i class="fa fa-th" aria-hidden="true"></i>
+									<span>GL Categories</span>
+								</a>
+								<div class="sidebar-submenu">
+									<ul>
+										<li>
+											@Html.ActionLink(linkText: "Add GL Category", actionName: "CreateCategory", controllerName: "GLCategory", routeValues: null, htmlAttributes: new { title = "Manage" })
+										</li>
+										<li>
+											@Html.ActionLink(linkText: "View GL Categories", actionName: "DisplayCategories", controllerName: "GLCategory", routeValues: null, htmlAttributes: new { title = "Manage" })
+										</li>
+									</ul>
+								</div>
+							</li>
+						}
+						<li class="sidebar-dropdown">
+							<a href="#">
+								<i class="fa fa-university" aria-hidden="true"></i>
+								<span>General Ledger Account</span>
+							</a>
+							<div class="sidebar-submenu">
+								<ul>
+									@if (User.IsInRole(SuperAdmininistratorRole) || User.IsInRole(AdministratorRole))
+									{
+										<li>
+											@Html.ActionLink(linkText: "Add GL Account", actionName: "CreateGLAccount", controllerName: "GLAccount", routeValues: null, htmlAttributes: new { title = "Manage" })
+										</li>
+									}
+									<li>
+										@Html.ActionLink(linkText: "View GL Accounts", actionName: "DisplayGLAccounts", controllerName: "GLAccount", routeValues: null, htmlAttributes: new { title = "Manage" })
+									</li>
+									@if (User.IsInRole(SuperAdmininistratorRole) || User.IsInRole(AdministratorRole))
+									{
+										<li>
+											@Html.ActionLink(linkText: "Edit GL Accounts", actionName: "DisplayGLAccounts", controllerName: "GLAccount", routeValues: null, htmlAttributes: new { title = "Manage" })
+										</li>
+									}
+								</ul>
+							</div>
+						</li>
+						@if (User.IsInRole(AdministratorRole) || User.IsInRole(SuperAdmininistratorRole))
+						{
+							<li class="sidebar-dropdown">
+								<a href="#">
+									<i class="fa fa-credit-card" aria-hidden="true"></i>
+									<span>GL Posting</span>
+								</a>
+								<div class="sidebar-submenu">
+									<ul>
+										<li>
+											@Html.ActionLink(linkText: "Post Transaction", actionName: "PostTransaction", controllerName: "Transaction", routeValues: null, htmlAttributes: new { title = "Manage" })
+										</li>
+										<li>
+											@Html.ActionLink(linkText: "View Postings", actionName: "DisplayTransactions", controllerName: "Transaction", routeValues: null, htmlAttributes: new { title = "Manage" })
+										</li>
+									</ul>
+								</div>
+							</li>
+						}
+						<li class="sidebar-dropdown">
+							<a href="#">
+								<i class="fa fa-paper-plane" aria-hidden="true"></i>
+								<span>Teller Posting</span>
+							</a>
+							<div class="sidebar-submenu">
+								<ul>
+									@if (User.IsInRole(TellerRole))
+									{
+										<li>
+											@Html.ActionLink(linkText: "Post Teller Transaction", actionName: "PostTeller", controllerName: "TellerPosting", routeValues: null, htmlAttributes: new { title = "Manage" })
+										</li>
+									}
+									<li>
+										@Html.ActionLink(linkText: "View Teller Postings", actionName: "DisplayTellerPostings", controllerName: "TellerPosting", routeValues: null, htmlAttributes: new { title = "Manage" })
+									</li>
+
+								</ul>
+							</div>
+						</li>
+
+						@if (User.IsInRole(AdministratorRole) || User.IsInRole(SuperAdmininistratorRole))
+						{
+							<li class="sidebar-dropdown">
+								<a href="#">
+									<i class="fa fa-users" aria-hidden="true"></i>
+									<span>Teller Management</span>
+								</a>
+								<div class="sidebar-submenu">
+									<ul>
+										<li>
+											@Html.ActionLink(linkText: "Assign Teller", actionName: "AssignTillToUser", controllerName: "TellerManagement", routeValues: null, htmlAttributes: new { title = "Manage" })
+										</li>
+									</ul>
+								</div>
+							</li>
+						}
+						@if (User.IsInRole(AdministratorRole) || User.IsInRole(SuperAdmininistratorRole))
+						{
+							<li class="sidebar-dropdown">
+								<a href="#">
+									<i class="fa fa-cogs" aria-hidden="true"></i>
+									<span>Account Configurations</span>
+								</a>
+								<div class="sidebar-submenu">
+									<ul>
+										<li>
+											@Html.ActionLink(linkText: "Edit Savings Account Configuration", actionName: "EditSavingsConfiguration", controllerName: "AccountConfiguration", routeValues: null, htmlAttributes: new { title = "Manage" })
+										</li>
+										<li>
+											@Html.ActionLink(linkText: "Edit Current Account Configuration", actionName: "EditCurrentConfiguration", controllerName: "AccountConfiguration", routeValues: null, htmlAttributes: new { title = "Manage" })
+										</li>
+										<li>
+											@Html.ActionLink(linkText: "Edit Loan Account Configuration", actionName: "EditLoanConfiguration", controllerName: "AccountConfiguration", routeValues: null, htmlAttributes: new { title = "Manage" })
+										</li>
+									</ul>
+								</div>
+							</li>
+						}
+						@if (User.IsInRole(SuperAdmininistratorRole))
+						{
+							<li class="sidebar-dropdown">
+								<a href="#">
+									<i class="fa fa-briefcase" aria-hidden="true"></i>
+									<span>Business Management</span>
+								</a>
+								<div class="sidebar-submenu">
+									<ul>
+										<li>
+											@Html.ActionLink(linkText: "Open/Close Business", actionName: "Index", controllerName: "EOD", routeValues: null, htmlAttributes: new { title = "Manage" })
+										</li>
+									</ul>
+								</div>
+							</li>
+						}
+
+						@if (User.IsInRole(SuperAdmininistratorRole) || User.IsInRole(AdministratorRole))
+						{
+							<li class="sidebar-dropdown">
+								<a href="#">
+									<i class="fa fa-table" aria-hidden="true"></i>
+									<span>Financial Reports</span>
+								</a>
+								<div class="sidebar-submenu">
+									<ul>
+										<li>
+											@Html.ActionLink(linkText: "Profit And Loss", actionName: "ProfitAndLoss", controllerName: "FinancialReport", routeValues: null, htmlAttributes: new { title = "Manage" })
+										</li>
+										<li>
+											@Html.ActionLink(linkText: "Balance Sheet", actionName: "BalanceSheet", controllerName: "FinancialReport", routeValues: null, htmlAttributes: new { title = "Manage" })
+										</li>
+										<li>
+											@Html.ActionLink(linkText: "Trial Balance", actionName: "TrialBalance", controllerName: "FinancialReport", routeValues: null, htmlAttributes: new { title = "Manage" })
+										</li>
+									</ul>
+								</div>
+							</li>
+
+						}
+						@if (User.IsInRole(AdministratorRole) || User.IsInRole(SuperAdmininistratorRole))
+						{
+							<li class="sidebar-dropdown">
+								<a href="#">
+									<i class="fa fa-user" aria-hidden="true"></i>
+									<span>Employee Management</span>
+								</a>
+								<div class="sidebar-submenu">
+									<ul>
+										<li>
+											@Html.ActionLink(linkText: "Register New Employee", actionName: "Register", controllerName: "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+										</li>
+										<li>
+											@Html.ActionLink(linkText: "View Employees", actionName: "DisplayUser", controllerName: "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+										</li>
+									</ul>
+								</div>
+							</li>
+						}
+						@if (User.IsInRole(SuperAdmininistratorRole))
+						{
+							<li class="sidebar-dropdown">
+								<a href="#">
+									<i class="fa fa-lock" aria-hidden="true"></i>
+									<span>Vault Management</span>
+								</a>
+								<div class="sidebar-submenu">
+									<ul>
+										<li>
+											@Html.ActionLink(linkText: "Set Vault Account", actionName: "SetVaultAccount", controllerName: "Vault", routeValues: null, htmlAttributes: new { title = "Manage" })
+										</li>
+										<li>
+											@Html.ActionLink(linkText: "Load Vault Account", actionName: "LoadVaultAccount", controllerName: "Vault", routeValues: null, htmlAttributes: new { title = "Manage" })
+										</li>
+									</ul>
+								</div>
+							</li>
+						}
+						@if (User.IsInRole(SuperAdmininistratorRole))
+						{
+							<li class="sidebar-dropdown">
+								<a href="#">
+									<i class="fa fa-home" aria-hidden="true"></i>
+									<span>Bank Branches</span>
+								</a>
+								<div class="sidebar-submenu">
+									<ul>
+										<li>
+											@Html.ActionLink(linkText: "Add Branch", actionName: "AddBranch", controllerName: "Branch", routeValues: null, htmlAttributes: new { title = "Manage" })
+										</li>
+										<li>
+											@Html.ActionLink(linkText: "View Branches", actionName: "DisplayBranches", controllerName: "Branch", routeValues: null, htmlAttributes: new { title = "Manage" })
+										</li>
+									</ul>
+								</div>
+							</li>
+						}
+						<li class="header-menu">
+							<span>User</span>
+						</li>
+						<li>
+							@Html.ActionLink(linkText: "Change password", actionName: "ChangePassword", controllerName: "Manage", routeValues: null, htmlAttributes: new { title = "Change Password" })
+							@*<span class="badge badge-pill badge-primary">Beta</span>*@
+						</li>
+						@if (Request.IsAuthenticated)
+						{
+							using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+							{
+								@Html.AntiForgeryToken()
+								<li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+							}
+						}
+						@*<li>
+			<a href="#">
+				<i class="fa fa-folder"></i>
+				<span>Examples</span>
+			</a>
+		</li>*@
+					</ul>
+				</div>
+			</nav>
+		</div>
+		<!-- sidebar-wrapper  -->
+		<main style="padding-left:260px;">
+			<div class="container">
+				@{Html.RenderPartial("_Alerts"); }
+				@RenderBody()
+
+			</div>
+			<footer class="footer">
+				<hr />
+				<p>&copy; @DateTime.Now.Year - <b>BANK TWO</b></p>
+			</footer>
+		</main>
+
+		<!-- page-content" -->
+	</div>
+	<!-- page-wrapper -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+			crossorigin="anonymous"></script>
+
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/bootstrap")
+	@RenderSection("scripts", required: false)
+</body>
+</html>

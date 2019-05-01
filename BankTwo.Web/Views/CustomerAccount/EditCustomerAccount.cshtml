@@ -1,0 +1,46 @@
+﻿@using ViewModels
+@model CustomerAccountViewModel
+@{
+    ViewBag.Title = "CUSTOMER ACCOUNTS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 class="text-center card-heading">@ViewBag.Title</h2>
+<hr />
+<div class="card-heading">
+    <span class="secondary-header">
+        Edit Customer Account
+    </span>
+</div>
+<hr />
+<div>
+    @using (Html.BeginForm("EditCustomerAccount", "CustomerAccount", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group row">
+            @Html.LabelFor(m => m.CAccountName, new { @class = "col-form-label text-md-right col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.CAccountName, new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.CAccountName)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Branches, new { @class = "col-md-2 col-form-label text-md-right" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.BranchId, new SelectList(Model.Branches, "Id", "Location"), "Select Branch", new { @class = "form-control col-md-10" })
+                @Html.ValidationMessageFor(m => m.BranchId)
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-2 col-form-label"></div>
+            <div class="col-md-4">
+                <input type="submit" class="btn btn-primary col-md-6" value="SAVE" />
+            </div>
+        </div>
+        @Html.HiddenFor(m => m.EncryptedId)
+    }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>
+

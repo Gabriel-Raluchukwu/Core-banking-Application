@@ -1,0 +1,60 @@
+﻿@using ViewModels
+@model IEnumerable<TransactionViewModel>
+@{
+    ViewBag.Title = "TRANSACTIONS MANAGEMENT";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1 class="text-center card-heading">@ViewBag.Title</h1>
+<div class="box">
+    <hr />
+    <div class="box-header card-heading">
+        <h3 class="box-title">Transactions</h3>
+    </div>
+    <hr />
+    <!-- /.box-header -->
+    <div class="box-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Debit Account</th>
+                    <th>Account Code</th>
+                    <th>Credit Account</th>
+                    <th>Account Code</th>
+                    <th>Debit Amount</th>
+                    <th>Credit Amount</th>
+                    <th>Narration</th>
+                    <th>Transaction Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var post in Model)
+                {
+                    <tr>
+                        <td>@post.DebitGLAccountName</td>
+                        <td>@post.DebitGLAccountNumber</td>
+                        <td>@post.CreditGLAccountName</td>
+                        <td>@post.CreditGLAccountNumber</td>
+                        <td>@post.DebitAmount</td>
+                        <td>@post.CreditAmount</td>
+                        <td>@post.Narration</td>
+                        <td>@post.TransactionDate</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Debit Account</th>
+                    <th>Account Code</th>
+                    <th>Credit Account</th>
+                    <th>Account Code</th>
+                    <th>Debit Amount</th>
+                    <th>Credit Amount</th>
+                    <th>Narration</th>
+                    <th>Transaction Date</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+@Scripts.Render("~/bundles/jqueryTable")
+
